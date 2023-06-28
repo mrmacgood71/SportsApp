@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/contentFragment"
+        android:name="it.macgood.sportsapp.presentation.ui.content.ContentFragment"
+        android:label="fragment_content"
+        tools:layout="@layout/fragment_content" >
+        <action
+            android:id="@+id/action_contentFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="it.macgood.sportsapp.presentation.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_contentFragment"
+            app:destination="@id/contentFragment"
+            app:enterAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="it.macgood.sportsapp.presentation.ui.webview.WebViewFragment"
+        android:label="Подробнее о матче"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="https://google.com/" />
+    </fragment>
+</navigation>

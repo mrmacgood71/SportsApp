@@ -1,0 +1,89 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'it.macgood.sportsapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "it.macgood.sportsapp"
+        minSdk 26
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+
+//    Core
+    implementation Libs.Android.CoreKtx
+    implementation Libs.Android.FragmentKtx
+    implementation Libs.Android.ActivityKtx
+    implementation Libs.Android.LifecycleRuntimeKtx
+    implementation Libs.Android.LifecycleViewModelKtx
+    implementation Libs.Android.CoroutinesCore
+    implementation Libs.Android.CoroutinesAndroid
+    implementation Libs.Android.NavigationFragment
+    implementation Libs.Android.NavigationUi
+//    Ui
+    implementation Libs.Android.AppCompat
+    implementation Libs.Android.Material
+    implementation Libs.Android.ConstraintLayout
+    implementation Libs.Ui.Lottie
+    implementation Libs.Ui.SplashScreen
+    implementation Libs.Ui.Shimmer
+    implementation Libs.Glide.Glide
+    kapt Libs.Glide.GlideCompiler
+
+//    Test
+    testImplementation Libs.Test.JUnit
+    androidTestImplementation Libs.Test.ExtJUnit
+    androidTestImplementation Libs.Test.EspressoCore
+
+//    Network
+    implementation Libs.Network.Retrofit
+    implementation Libs.Network.RetrofitGsonConverter
+    implementation Libs.Network.OkHttp3LoggingInterceptor
+
+//    Hilt
+    implementation Libs.DI.Hilt
+    kapt Libs.DI.HiltCompiler
+
+    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+
+    implementation project(":core")
+    implementation project(":data")
+    implementation project(":domain")
+}
